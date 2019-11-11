@@ -13,7 +13,7 @@ export const useAxios = initialUrl => {
     error: null,
   };
 
-  const axiosReducer = (state, action) => {
+  const axiosReducer = (state = initialState, action) => {
     switch (action.type) {
       case FETCH_START:
         return { ...state, data: {}, isLoading: true, error: null };
@@ -41,4 +41,7 @@ export const useAxios = initialUrl => {
   }, [url]);
 
   return [state, setUrl];
+
+
+
 };

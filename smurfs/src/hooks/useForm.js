@@ -11,9 +11,9 @@ export const useForm = (initialState, callback) => {
       case FORM_CHANGE:
         return { ...state, [action.payload.name]: action.payload.value };
       case FORM_AGE_CHANGE:
-        return { ...state, [action.payload.age]: action.payload.value };
+        return { ...state, [action.payload.name]: action.payload.value };
       case FORM_HEIGHT_CHANGE:
-        return { ...state, [action.payload.hieght]: action.payload.value };
+        return { ...state, [action.payload.name]: action.payload.value };
       case FORM_SUBMIT:
         return initialState;
       default:
@@ -23,17 +23,19 @@ export const useForm = (initialState, callback) => {
   const [state, dispatch] = useReducer(formReducer, initialState);
 
   const nameHandleChange = ({ target: { name, value } }) =>
-    dispatch({ type: FORM_CHANGE, payload: { name, value } });
+  {console.log(name,"name")
+    dispatch({ type: FORM_CHANGE, payload: { name, value } })}
 
-  const nameHandleSubmit = e => {
+  const handleSubmit = e => {
     e.preventDefault();
-    console.log(callback);
+    console.log(callback,"callback");
     callback();
     dispatch({ type: FORM_SUBMIT });
   };
 
-  const ageHandleChange = ({ target: { age, value } }) =>
-    dispatch({ type: FORM_CHANGE, payload: { age, value } });
+  const ageHandleChange = ({ target: { name, value } }) =>
+  {console.log(name,"age")
+    dispatch({ type: FORM_CHANGE, payload: { name, value } })}
 
   const ageHandleSubmit = e => {
     e.preventDefault();
@@ -42,8 +44,8 @@ export const useForm = (initialState, callback) => {
     dispatch({ type: FORM_SUBMIT });
   };
 
-  const heightHandleChange = ({ target: { height, value } }) =>
-    dispatch({ type: FORM_CHANGE, payload: { height, value } });
+  const heightHandleChange = ({ target: { name, value } }) =>
+    dispatch({ type: FORM_CHANGE, payload: { name, value } });
 
   const heightHandleSubmit = e => {
     e.preventDefault();
@@ -55,10 +57,10 @@ export const useForm = (initialState, callback) => {
   return [
     state,
     nameHandleChange,
-    nameHandleSubmit,
     ageHandleChange,
-    ageHandleSubmit,
     heightHandleChange,
-    heightHandleSubmit
+    handleSubmit,
+    // ageHandleSubmit,
+    // heightHandleSubmit
   ];
 };

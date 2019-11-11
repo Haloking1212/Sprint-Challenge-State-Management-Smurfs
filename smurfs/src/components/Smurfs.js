@@ -9,7 +9,12 @@ function Smurfs () {
   }
 
   const { state, setUrl } = useContext(SmurfContext);
-  const [values, handleChange, handleSubmit, ageHandleChange, heightHandleChange] = useForm({name: '', age: "", height: "", id: Date.now()}, callback);
+  const [values,
+     nameHandleChange,
+     ageHandleChange,
+     heightHandleChange,
+      handleSubmit,
+   ] = useForm({name: '', age: "", height: "", id: Date.now()}, callback);
 
   return (
     <>
@@ -18,7 +23,7 @@ function Smurfs () {
         <input
           name='name'
           placeholder="name"
-          onChange={handleChange}
+          onChange={nameHandleChange}
         />
         <input 
         name="age"
