@@ -6,7 +6,7 @@ Answer: context api helps solve the problem of not having to prop drill down eve
 
 Answer: actions are triggers that set off the reducers,
         reducers communicate with the store picking out what state that want changed,
-        store is what holds the initialState.
+        store is what holds the application state.
 
 3. What is the difference between Application state and Component state? When would be a good time to use one over the other?
 
