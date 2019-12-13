@@ -1,13 +1,24 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 import { Route } from "react-router-dom";
-import { useAxios } from "../hooks/useAxios";
-import { SmurfProvider } from "../context/SmurfContext";
 import Smurfs from "./Smurfs";
-
+import { SmurfContext } from "../context/SmurfContext";
 import "./App.css";
 
 function App() {
-  const [state, setUrl] = useAxios("http://localhost:3333/smurfs");
+  const [data, setData] = useState([]);
+  const [update, setUpdate] = useState(false)
+
+  useEffect(() => {
+    axios.get("http://localhost:3333/smurfs").then(response => {
+      console.log(data);
+      setData(response.data);
+    });
+
+  }, [update]);
+
+  console.log(data,"data testing")
+
 
   return (
     <div className="App">
@@ -16,9 +27,9 @@ function App() {
       <div>Start inside of your `src/index.js` file!</div>
       <div>Have fun!</div>
 
-      <SmurfProvider value={{ state, setUrl }}>
+      <SmurfContext.Provider value={{ data, update, setUpdate }}>
         <Route exact path="/" component={Smurfs} />
-      </SmurfProvider>
+      </SmurfContext.Provider>
     </div>
   );
 }
